@@ -106,3 +106,7 @@ venv.bak/
 # Nodejs
 node_modules/
 bower_components/
+
+
+.idea/
+.vscode/
