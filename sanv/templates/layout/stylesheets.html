@@ -1,0 +1,8 @@
+{% load staticfiles %}
+{% if USE_CDN_ASSET %}
+    <link href="https://unpkg.com/@blueprintjs/core@^1.11.0/dist/blueprint.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/tea-asset/css/main.css">
+{% else %}
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <link rel="icon" href="{% static 'images/topica_native_icon.ico' %}" type="image/x-icon" />
+{% endif %}

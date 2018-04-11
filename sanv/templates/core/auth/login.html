@@ -1,0 +1,42 @@
+{% extends 'layout/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block page_title %}Đăng nhập{% endblock %}
+
+{% block content %}
+<div class="auth-page login-page">
+    <div class="pt-card pt-elevation-4 page-card">
+        <h1 class="card-header">Đăng nhập</h1>
+
+        <div class="card-body">
+            <form method="POST" action="/login/">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                <div class="pt-callout pt-intent-danger">
+                    <h5>Oops</h5>
+                    {{ form.non_field_errors.0 }}
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div class="pt-input-group pt-large">
+                        <span class="pt-icon pt-icon-{{ field.help_text }}"></span>
+                        {% if field.errors %}
+                            {{ field|add_class:'pt-intent-danger' }}
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button class="pt-button pt-intent-success pt-fill pt-large" type="submit">Đăng nhập</button>
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <p class="text-center"><a href="/password_reset/">Quên mật khẩu</a></p>
+            <p class="text-center">Chưa có tài khoản? <a href="/register/">Đăng ký</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

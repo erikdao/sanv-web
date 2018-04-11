@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block page_title %}{% endblock %} | SANV - Sweden Alumni Network Vietnam</title>
+        {% include 'layout/stylesheets.html' %}
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+
+        <!--{% include 'layout/javascript.html' %}-->
+        <!--{% block scripts %}{% endblock %}-->
+    </body>
+</html>

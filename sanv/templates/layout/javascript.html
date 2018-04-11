@@ -1,0 +1,7 @@
+{% load staticfiles %}
+
+{% if USE_CDN_ASSET %}
+    <script src="https://s3-ap-southeast-1.amazonaws.com/tea-asset/js/bundle.js" type="text/javascript"></script>
+{% else %}
+    <script src="{% static '/js/bundle.js' %}" type="text/javascript"></script>
+{% endif %}

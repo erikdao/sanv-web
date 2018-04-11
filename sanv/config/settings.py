@@ -11,9 +11,24 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+
+# def get_env(var_name):
+#     """Get the environment variable or return an exception."""
+#     try:
+#         return os.environ[var_name]
+#     except KeyError:
+#         error_msg = f'Set the {var_name} environment variable.'
+#         raise ImproperlyConfigured(error_msg)
+#
+# def convert_str_to_list(string, delim = ','):
+#     return string.split(delim)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -36,8 +51,8 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    # 'widget_tweaks',
-    # 'rest_framework',
+    'widget_tweaks',
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
@@ -55,7 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+AUTH_USER_MODEL = 'core.User'
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -122,3 +137,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+#
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+CANONICAL_URL = os.getenv('CANONICAL_URL')

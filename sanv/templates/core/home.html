@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+
+{% block page_title %}Trang chủ{% endblock %}
+
+{% block content %}
+    {#    <div id="root"></div>#}
+    <h1>
+        WELCOME TO SANV
+        <br>
+        {% if user.is_authenticated %}
+            welcome {{ user.last_name }}
+            <br>
+            <a href="{% url 'core:logout' %}">logout</a>
+        {% else %}
+            <br>
+            <a href="{% url 'core:login' %}">login</a>
+            <br>
+            <a href="{% url 'core:register' %}">register</a>
+        {% endif %}
+    </h1>
+{% endblock %}

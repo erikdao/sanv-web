@@ -1,0 +1,41 @@
+{% extends 'layout/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block page_title %}Tạo tài khoản mới{% endblock %}
+
+{% block content %}
+<div class="auth-page register-page">
+    <div class="pt-card pt-elevation-4 page-card">
+        <h1 class="card-header">Đăng ký tài khoản</h1>
+
+        <div class="card-body">
+            <form method="POST" action="/register/">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label class="pt-label">
+                            {{ field.label_tag }}
+                            <div class="pt-input-group pt-large">
+                                <span class="pt-icon pt-icon-{{ field.help_text }}"></span>
+                                {% if field.errors %}
+                                    {{ field|add_class:'pt-intent-danger' }}
+                                    <span class="form-control-text error-text">{{ field.errors.0 }}</span>
+                                {% else %}
+                                    {{ field }}
+                                {% endif%}
+                            </div>
+                        </label>
+                    </div>
+                {% endfor %}
+                <button class="pt-button pt-intent-success pt-fill pt-large" type="submit">Tạo tài khoản mới</button>
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <p class="text-center">Đã có tài khoản? <a href="/login/">Đăng nhập</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
