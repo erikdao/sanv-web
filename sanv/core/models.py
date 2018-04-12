@@ -31,8 +31,14 @@ class UserProfile(models.Model):
     """
 
     job = models.CharField(max_length=100, blank=True, null=True)
+    company = models.CharField(max_length=100, blank=True, null=True)
     job_position = models.CharField(max_length=100, blank=True, null=True)
     dob = models.DateField(null=True)
+    tel = models.CharField(max_length=100, blank=True, null=True)
+    unv_sweden = models.CharField(max_length=100, blank=True, null=True)
+    major_sweden = models.CharField(max_length=100, blank=True, null=True)
+
+    objects = models.Manager()
 
 
 class User(AbstractBaseUser, PermissionsMixin, TimedStampModel):
@@ -42,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimedStampModel):
     is_active = models.BooleanField(default=False)
     activation_token = models.CharField(max_length=255, null=True)
     password_reset_token = models.CharField(max_length=255, null=True)
-    profile = models.OneToOneField(UserProfile, blank=True, null=True, related_name='profile', on_delete=models.PROTECT)
+    profile = models.OneToOneField(UserProfile, blank=True, null=True, related_name='user', on_delete=models.PROTECT)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELD = ['email']
@@ -67,7 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimedStampModel):
         try:
             send_mail(
                 from_email=settings.ADMIN_EMAIL,
-                subject='[TEA] Kích hoạt tài khoản',
+                subject='[SANV] Kích hoạt tài khoản',
                 to_email=self.email,
                 content=email_str
             )

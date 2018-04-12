@@ -2,15 +2,16 @@
 
 {% load widget_tweaks %}
 
-{% block page_title %}Tạo tài khoản mới{% endblock %}
+{% block page_title %} Profle của {{ full_name }} < {{ email }} > {% endblock %}
 
 {% block content %}
 <div class="auth-page register-page">
     <div class="pt-card pt-elevation-4 page-card">
-        <h1 class="card-header">Đăng ký tài khoản</h1>
+        <h1 class="card-header">Profile</h1>
+        Profle của {{ full_name }} < {{ email }} > <br>
 
         <div class="card-body">
-            <form method="POST" action={% url 'core:register' %}>
+            <form method="POST" action= {% url 'core:profile' %}>
                 {% csrf_token %}
                 {{ form.non_field_errors }}
                 {% for field in form %}
@@ -29,13 +30,10 @@
                         </label>
                     </div>
                 {% endfor %}
-                <button class="pt-button pt-intent-success pt-fill pt-large" type="submit">Tạo tài khoản mới</button>
+                <button class="pt-button pt-intent-success pt-fill pt-large" type="submit">Update Profile</button>
             </form>
         </div>
 
-        <div class="card-footer">
-            <p class="text-center">Đã có tài khoản? <a href={% url 'core:login' %}>Đăng nhập</a></p>
-        </div>
     </div>
 </div>
 {% endblock %}

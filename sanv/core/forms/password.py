@@ -27,7 +27,7 @@ class PasswordResetForm(forms.Form):
         email = cleaned_data.get('email')
 
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(request=email)
         except User.DoesNotExist:
             msg = 'Không tồn tại tài khoản với email này. Xin ' \
                   'vui lòng kiểm tra lại.'

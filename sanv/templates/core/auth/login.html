@@ -10,7 +10,7 @@
         <h1 class="card-header">Đăng nhập</h1>
 
         <div class="card-body">
-            <form method="POST" action="/login/">
+            <form method="POST" action={% url 'core:login' %}>
                 {% csrf_token %}
                 {% if form.non_field_errors %}
                 <div class="pt-callout pt-intent-danger">
@@ -34,8 +34,8 @@
         </div>
 
         <div class="card-footer">
-            <p class="text-center"><a href="/password_reset/">Quên mật khẩu</a></p>
-            <p class="text-center">Chưa có tài khoản? <a href="/register/">Đăng ký</a></p>
+            <p class="text-center"><a href={% url 'core:password_reset' %}>Quên mật khẩu</a></p>
+            <p class="text-center">Chưa có tài khoản? <a href={% url 'core:register' %}>Đăng ký</a></p>
         </div>
     </div>
 </div>

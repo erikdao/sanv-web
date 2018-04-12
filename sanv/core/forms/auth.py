@@ -39,7 +39,7 @@ class LoginForm(forms.Form):
 
         user = authenticate(email=email, password=password)
         if not user:
-            msg = 'Email hoặc mật khẩu không đúng'
+            msg = 'Email chưa kích  hoạt hoặc email / mật khẩu không đúng'
             self.add_error(None, msg)
         
         return cleaned_data
