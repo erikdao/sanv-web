@@ -48,7 +48,7 @@ def make_password_reset_link(token):
 def is_email_exist(email):
     from ..models import User
     try:
-        user = User.objects.get(request=email)
+        user = User.objects.get(email=email)
         return user is not None
     except User.DoesNotExist:
         return False

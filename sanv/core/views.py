@@ -151,7 +151,7 @@ class AccountActivationView(TemplateView):
 
     def get(self, request, token):
         try:
-            user = User.objects.get(request=token)
+            user = User.objects.get(activation_token=token)
             user.activate()
             return render(request, 'core/auth/activate_account_success.html')
         except User.DoesNotExist:
@@ -170,7 +170,7 @@ class PasswordResetView(TemplateView):
 
         if form.is_valid():
             email = form.cleaned_data.get('email')
-            user = User.objects.get(request=email)
+            user = User.objects.get(email=email)
             user.send_password_reset_email()
             return render(request, 'core/auth/password_reset_notice.html')
 
@@ -182,7 +182,7 @@ class NewPasswordView(TemplateView):
 
     def get(self, request, token):
         try:
-            user = User.objects.get(request=token)
+            user = User.objects.get(password_reset_token=token)
             form = NewPasswordForm()
             return render(request, self.template_name, {'form': form})
         except User.DoesNotExist:
@@ -192,7 +192,7 @@ class NewPasswordView(TemplateView):
         form = NewPasswordForm(request.POST)
 
         if form.is_valid():
-            user = User.objects.get(request=token)
+            user = User.objects.get(password_reset_token=token)
             password = form.cleaned_data.get('password')
             user.reset_password(password)
             return render(request, 'core/auth/password_reset_success.html')
