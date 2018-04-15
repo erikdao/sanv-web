@@ -2,6 +2,7 @@ certifi==2018.1.18
 Django==2.0.2
 django-widget-tweaks==1.4.2
 djangorestframework==3.8.2
+gunicorn==19.7.1
 linecache2==1.0.0
 python-dotenv==0.8.2
 python-http-client==3.0.0
