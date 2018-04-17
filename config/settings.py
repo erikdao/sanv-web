@@ -19,7 +19,7 @@ def get_env(var_name):
         return os.environ[var_name]
     except KeyError:
         error_msg = f'Set the {var_name} environment variable.'
-        raise ImproperlyConfigured(error_msg)
+        # raise ImproperlyConfigured(error_msg)
 
 def convert_str_to_list(string, delim = ','):
     return string.split(delim)
