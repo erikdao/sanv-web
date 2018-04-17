@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 def get_env(var_name):
@@ -92,16 +93,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': get_env('DATABASE_ENGINE'),
-        'NAME': get_env('DATABASE_NAME'),
-        'USER': get_env('DATABASE_USER'),
-        'PASSWORD': get_env('DATABASE_PASSWORD'),
-        'HOST': get_env('DATABASE_HOST'),
-        'PORT': get_env('DATABASE_PORT'),
+HEROKU = get_env('HEROKU') == 'True'
+
+if(HEROKU):
+    DATABASES['default'] = dj_database_url.config()
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': get_env('DATABASE_ENGINE'),
+            'NAME': get_env('DATABASE_NAME'),
+            'USER': get_env('DATABASE_USER'),
+            'PASSWORD': get_env('DATABASE_PASSWORD'),
+            'HOST': get_env('DATABASE_HOST'),
+            'PORT': get_env('DATABASE_PORT'),
+        }
     }
-}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

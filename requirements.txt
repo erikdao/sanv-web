@@ -1,4 +1,5 @@
 certifi==2018.1.18
+dj-database-url==0.5.0
 Django==2.0.2
 django-widget-tweaks==1.4.2
 djangorestframework==3.8.2
