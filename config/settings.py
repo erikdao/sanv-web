@@ -95,6 +95,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 HEROKU = get_env('HEROKU') == 'True'
 
+DATABASES = {}
+
 if(HEROKU):
     DATABASES['default'] = dj_database_url.config()
 else:
