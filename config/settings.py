@@ -11,24 +11,22 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv
 
 
-# def get_env(var_name):
-#     """Get the environment variable or return an exception."""
-#     try:
-#         return os.environ[var_name]
-#     except KeyError:
-#         error_msg = f'Set the {var_name} environment variable.'
-#         raise ImproperlyConfigured(error_msg)
-#
-# def convert_str_to_list(string, delim = ','):
-#     return string.split(delim)
+def get_env(var_name):
+    """Get the environment variable or return an exception."""
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = f'Set the {var_name} environment variable.'
+        raise ImproperlyConfigured(error_msg)
+
+def convert_str_to_list(string, delim = ','):
+    return string.split(delim)
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -96,8 +94,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': get_env('DATABASE_ENGINE'),
+        'NAME': get_env('DATABASE_NAME'),
+        'USER': get_env('DATABASE_USER'),
+        'PASSWORD': get_env('DATABASE_PASSWORD'),
+        'HOST': get_env('DATABASE_HOST'),
+        'PORT': get_env('DATABASE_PORT'),
     }
 }
 
@@ -143,7 +145,7 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-#
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
-CANONICAL_URL = os.getenv('CANONICAL_URL')
+SENDGRID_API_KEY = get_env('SENDGRID_API_KEY')
+
+ADMIN_EMAIL = get_env('ADMIN_EMAIL')
+CANONICAL_URL = get_env('CANONICAL_URL')
